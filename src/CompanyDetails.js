@@ -8,10 +8,11 @@ import { useParams } from "react-router-dom";
  */
 
 function CompanyDetails() {
-
   const { handle } = useParams();
   return (
-    <h1>CompanyDetails for {handle}</h1>
+    <div>
+      <h1>CompanyDetails for {handle}</h1>
+    </div>
   );
 };
 
