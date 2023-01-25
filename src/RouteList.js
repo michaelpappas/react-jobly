@@ -14,7 +14,7 @@ function RouteList() {
     <Routes>
       <Route element={<HomePage />} path="/" />
       <Route element={<Companies />} path="/companies" />
-      <Route element={<CompanyDetails />} path="/company/:handle" />
+      <Route element={<CompanyDetails />} path="/companies/:handle" />
       <Route element={<Jobs />} path="/jobs" />
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
