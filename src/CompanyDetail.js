@@ -10,38 +10,43 @@ import Loading from "./Loading";
  * - company - a company object like { handle, name, numEmployees, jobs }
  *    jobs - a list of objects like { id, title, salary, equity }
  */
-function CompanyDetails() {
-  //TODO:rename to CompanyDetail
+function CompanyDetail() {
+
   const { handle } = useParams();
 
-  const [company, setCompany] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  //TODO: batch loading with company states
-  // ran into bug where loading is set to false before promise is finished awaiting
+  const [company, setCompany] = useState({ data: {}, isLoading: true, errors: null });
 
   useEffect(fetchCompanyOnMount, [handle]);
 
   /** Fetches company and set company state */
   function fetchCompanyOnMount() {
     async function fetchCompany() {
-      const response = await JoblyApi.getCompany(handle);
-      //TODO: add some error handling
-      setCompany(response);
-      setIsLoading(false);
+      try {
+        const response = await JoblyApi.getCompany(handle);
+        setCompany({ data: response, isLoading: false });
+      }
+      catch (err) {
+        setCompany({
+          data: null,
+          isLoading: false,
+          errors: err
+        });
+      }
     }
     fetchCompany();
   }
 
-  // if(!company) return <Loading/>
-  if (isLoading) return <Loading />;
+
+  if (company.isLoading) return <Loading />;
+  else if (company.errors) return <b> Error: {company.errors}</b>;
 
   return (
     <div>
-      <h1>CompanyDetails for {company.name}</h1>
-      <p>{company.description}</p>
-      <JobList jobs={company.jobs} />
+      <h1>CompanyDetail for {company.data.name}</h1>
+      <p>{company.data.description}</p>
+      <JobList jobs={company.data.jobs} />
     </div>
   );
 };
 
-export default CompanyDetails;
+export default CompanyDetail;

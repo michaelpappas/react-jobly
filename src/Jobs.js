@@ -9,35 +9,44 @@ import JobList from "./JobList";
  * State:
  * - jobs - a list of objects like { id, title, salary, equity }
  */
-function Jobs(){
-  const [jobs, setJobs] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+function Jobs() {
+  const [jobs, setJobs] = useState({ data: [], isLoading: true, errors: null });
 
   useEffect(fetchJobsOnMount, []);
 
   /** Fetches jobs and sets job state */
   function fetchJobsOnMount(search) {
     async function fetchJobs(search) {
-      const response = await JoblyApi.getJobs(search);
-      setJobs(response)
+      try {
+        const response = await JoblyApi.getJobs(search);
+        setJobs({ data: response, isLoading: false, errors: null });
+      }
+      catch (err) {
+        setJobs({
+          data: null,
+          isLoading: false,
+          errors: err
+        });
+      }
     }
+
     fetchJobs(search);
-    setIsLoading(false)
   }
 
   /** Resets job state based on search term */
   function handleSearch(searchTerm) {
-    fetchJobsOnMount(searchTerm)
+    fetchJobsOnMount(searchTerm);
   }
 
-  if (isLoading) return <Loading />;
+  if (jobs.isLoading) return <Loading />;
+  else if (jobs.errors) return <b> Error: {jobs.errors}</b>;
 
   return (
     <div className="Jobs">
-      <SearchBar handleSearch={handleSearch}/>
-      <JobList jobs={jobs}/>
+      <SearchBar handleSearch={handleSearch} />
+      <JobList jobs={jobs.data} />
     </div>
-  )
+  );
 }
 
 export default Jobs;

@@ -10,20 +10,26 @@ import { useState, useEffect } from "react";
  * - Companies - Array of company obj like [{handle, name, numEmployees,... }]
  */
 function Companies() {
-  const [companies, setCompanies] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  //this works here but not in company details
+  const [companies, setCompanies] = useState({ data: [], isLoading: true, errors: null });
 
   useEffect(fetchCompaniesOnMount, []);
 
   /** Fetches companies and sets companies state */
   function fetchCompaniesOnMount(search) {
     async function fetchCompanies(search) {
-      const response = await JoblyApi.getCompanies(search);
-      setCompanies(response);
+      try {
+        const response = await JoblyApi.getCompanies(search);
+        setCompanies({ data: response, isLoading: false, errors: null });
+      }
+      catch (err) {
+        setCompanies({
+          data: null,
+          isLoading: false,
+          errors: err
+        });
+      }
     }
     fetchCompanies(search);
-    setIsLoading(false);
   }
 
   /** Resets companies state based on search term */
@@ -31,12 +37,13 @@ function Companies() {
     fetchCompaniesOnMount(searchTerm);
   }
 
-  if (isLoading) return <Loading />;
+  if (companies.isLoading) return <Loading />;
+  else if (companies.errors) return <b> Error: {companies.errors}</b>;
 
   return (
     <div>
       <SearchBar handleSearch={handleSearch} />
-      <CompanyList companies={companies} />
+      <CompanyList companies={companies.data} />
     </div>
   );
 }
