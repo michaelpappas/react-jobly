@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 
+/**
+ * Company - renders company information
+ * Props:
+ * - company - obj like { name, description, handle, ... }
+ */
 function Company({ company }) {
-  console.log('company',company);
   return (
     <Link to={`/companies/${company.handle}`}>
       <h1>{company.name}</h1>

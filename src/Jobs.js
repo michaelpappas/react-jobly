@@ -15,6 +15,7 @@ function Jobs(){
 
   useEffect(fetchJobsOnMount, []);
 
+  /** Fetches jobs and sets job state */
   function fetchJobsOnMount(search) {
     async function fetchJobs(search) {
       const response = await JoblyApi.getJobs(search);
@@ -24,6 +25,7 @@ function Jobs(){
     setIsLoading(false)
   }
 
+  /** Resets job state based on search term */
   function handleSearch(searchTerm) {
     fetchJobsOnMount(searchTerm)
   }

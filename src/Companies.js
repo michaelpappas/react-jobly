@@ -12,9 +12,11 @@ import { useState, useEffect } from "react";
 function Companies() {
   const [companies, setCompanies] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  //this works here but not in company details
 
   useEffect(fetchCompaniesOnMount, []);
 
+  /** Fetches companies and sets companies state */
   function fetchCompaniesOnMount(search) {
     async function fetchCompanies(search) {
       const response = await JoblyApi.getCompanies(search);
@@ -24,6 +26,7 @@ function Companies() {
     setIsLoading(false);
   }
 
+  /** Resets companies state based on search term */
   function handleSearch(searchTerm) {
     fetchCompaniesOnMount(searchTerm);
   }
