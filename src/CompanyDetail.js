@@ -42,7 +42,7 @@ function CompanyDetail() {
 
   return (
     <div>
-      <h1>CompanyDetail for {company.data.name}</h1>
+      <h1>{company.data.name}</h1>
       <p>{company.data.description}</p>
       <JobList jobs={company.data.jobs} />
     </div>

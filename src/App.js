@@ -28,7 +28,6 @@ function App() {
 
   useEffect(fetchUserData, [token]);
 
-
   function fetchUserData() {
     async function fetchUser() {
       if (token) {
@@ -44,7 +43,6 @@ function App() {
 
           // update user with user data
           setUser((curr) => ({ ...curr, data: resp, isLoading: false }));
-
         } catch (err) {
           setUser({
             data: null,
@@ -64,7 +62,6 @@ function App() {
   async function login(data) {
     const response = await JoblyApi.login(data);
     setToken(response.token);
-
   }
 
   /** logs out user */
@@ -85,14 +82,16 @@ function App() {
   else if (user.errors) return <div>{user.errors.message}</div>;
 
   return (
-    <userContext.Provider value={{ user: user.data }}>
-      <div className="App">
+    <div className="App">
+      <userContext.Provider value={{ user: user.data }}>
         <BrowserRouter>
           <NavBar logout={logout} />
-          <RouteList login={login} signUp={signUp} />
+          <div className="container mt-5">
+            <RouteList login={login} signUp={signUp} />
+          </div>
         </BrowserRouter>
-      </div>
-    </userContext.Provider>
+      </userContext.Provider>
+    </div>
   );
 }
 

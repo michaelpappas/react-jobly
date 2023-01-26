@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 /**
  * SignUp Form
@@ -10,8 +11,11 @@ function SignUpForm({ signUp }) {
     firstName: "",
     lastName: "",
     password: "",
-    email: ""
+    email: "",
   });
+
+  const navigate = useNavigate();
+
   function handleChange(evt) {
     const { name, value } = evt.target;
     setFormData((data) => ({
@@ -23,52 +27,63 @@ function SignUpForm({ signUp }) {
   function handleSubmit(evt) {
     evt.preventDefault();
     signUp(formData);
+    navigate("/");
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name="username"
-        placeholder="username"
-        type="text"
-        id="username"
-        onChange={handleChange}
-        value={formData.username}
-      />
-      <input
-        name="password"
-        placeholder="password"
-        type="password"
-        id="password"
-        onChange={handleChange}
-        value={formData.password}
-      />
-      <input
-        name="firstName"
-        placeholder="firstName"
-        type="text"
-        id="firstName"
-        onChange={handleChange}
-        value={formData.firstName}
-      />
-      <input
-        name="lastName"
-        placeholder="lastName"
-        type="text"
-        id="lastName"
-        onChange={handleChange}
-        value={formData.lastName}
-      />
-      <input
-        name="email"
-        placeholder="email"
-        type="email"
-        id="email"
-        onChange={handleChange}
-        value={formData.email}
-      />
-      <button>Sign Up</button>
-    </form>
+    <div className="w-50 m-auto">
+      <div className="card">
+        <form onSubmit={handleSubmit} className="card-body form-group">
+          <h5 className="card-title">Sign Up</h5>
+          <input
+            className="form-control mb-2"
+            name="username"
+            placeholder="Username"
+            type="text"
+            id="username"
+            onChange={handleChange}
+            value={formData.username}
+          />
+          <input
+            className="form-control mb-2"
+            name="password"
+            placeholder="Password"
+            type="password"
+            id="password"
+            onChange={handleChange}
+            value={formData.password}
+          />
+          <input
+            className="form-control mb-2"
+            name="firstName"
+            placeholder="First Name"
+            type="text"
+            id="firstName"
+            onChange={handleChange}
+            value={formData.firstName}
+          />
+          <input
+            className="form-control mb-2"
+            name="lastName"
+            placeholder="Last Name"
+            type="text"
+            id="lastName"
+            onChange={handleChange}
+            value={formData.lastName}
+          />
+          <input
+            className="form-control mb-2"
+            name="email"
+            placeholder="Email"
+            type="email"
+            id="email"
+            onChange={handleChange}
+            value={formData.email}
+          />
+          <button className="btn btn-primary">Sign Up</button>
+        </form>
+      </div>
+    </div>
   );
 }
 

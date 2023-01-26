@@ -8,23 +8,49 @@ import { useContext } from "react";
 function NavBar({ logout }) {
   const { user } = useContext(userContext);
   return (
-    <nav className="NavBar">
-      <div></div>
-      <NavLink to="/">Home</NavLink>
-      <div className="NavBar-right">
-        {user ? (
-          <>
-            <NavLink to="/companies">Companies</NavLink>
-            <NavLink to="/jobs">Jobs</NavLink>
-            <NavLink onClick={logout} to="/">Logout</NavLink>
-            <NavLink to="/profile">Profile</NavLink>
-          </>
-        ) : (
-          <>
-            <NavLink to="/login">Login</NavLink>
-            <NavLink to="/signup">Register</NavLink>
-          </>
-        )}
+    <nav className="navbar justify-content-between navbar-expand navbar-dark bg-dark">
+      <NavLink className="navbar-brand" to="/">Jobly</NavLink>
+
+      <div>
+        <ul className="navbar-nav mr-auto">
+          {user ? (
+            <>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/companies">
+                  Companies
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/jobs">
+                  Jobs
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" onClick={logout} to="/">
+                  Logout
+                </NavLink>
+              </li>
+              {/* <li className="nav-item">
+                <NavLink className="nav-link" to="/profile">
+                  Profile
+                </NavLink>
+              </li> */}
+            </>
+          ) : (
+            <>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/login">
+                  Login
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/signup">
+                  Sign Up
+                </NavLink>
+              </li>
+            </>
+          )}
+        </ul>
       </div>
     </nav>
   );

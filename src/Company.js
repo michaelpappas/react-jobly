@@ -9,10 +9,12 @@ import "./Company.css";
 function Company({ company }) {
 
   return (
-    <Link to={`/companies/${company.handle}`}>
-      <h1>{company.name}</h1>
-      <p>{company.description}</p>
-      {company.logoUrl && <img src={company.logoUrl} alt={company.handle} />}
+    <Link to={`/companies/${company.handle}`} className="card mb-2">
+      <div className="card-body">
+        <h1>{company.name}</h1>
+        <p>{company.description}</p>
+        {company.logoUrl && <img src={company.logoUrl} alt={company.handle} />}
+      </div>
     </Link>
   );
 }

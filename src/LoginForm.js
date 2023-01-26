@@ -28,25 +28,32 @@ function LoginForm({ login }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name="username"
-        placeholder="username"
-        type="text"
-        id="username"
-        onChange={handleChange}
-        value={formData.username}
-      />
-      <input
-        name="password"
-        placeholder="password"
-        type="password"
-        id="password"
-        onChange={handleChange}
-        value={formData.password}
-      />
-      <button>Login</button>
-    </form>
+    <div className="w-50 m-auto">
+      <div className="card">
+        <form onSubmit={handleSubmit} className="card-body form-group">
+          <h5 className="card-title">Login</h5>
+          <input
+            className="form-control mb-2"
+            name="username"
+            placeholder="username"
+            type="text"
+            id="username"
+            onChange={handleChange}
+            value={formData.username}
+          />
+          <input
+            className="form-control mb-2"
+            name="password"
+            placeholder="password"
+            type="password"
+            id="password"
+            onChange={handleChange}
+            value={formData.password}
+          />
+          <button className="btn btn-primary">Login</button>
+        </form>
+      </div>
+    </div>
   );
 }
 
