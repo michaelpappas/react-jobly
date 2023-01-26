@@ -16,6 +16,7 @@ function SignUpForm({ signUp }) {
 
   const navigate = useNavigate();
 
+  /** handles form input changes */
   function handleChange(evt) {
     const { name, value } = evt.target;
     setFormData((data) => ({
@@ -24,6 +25,7 @@ function SignUpForm({ signUp }) {
     }));
   }
 
+  /** on form submission calls parent function and redirects to home*/
   function handleSubmit(evt) {
     evt.preventDefault();
     signUp(formData);

@@ -28,6 +28,12 @@ function App() {
 
   useEffect(fetchUserData, [token]);
 
+
+  /** triggers from token useEffect
+   * fetches user data from the API with username in token
+   * sets user state to api user data response.
+   * like: {username, firstName, lastName, isAdmin, jobs}
+  */
   function fetchUserData() {
     async function fetchUser() {
       if (token) {
