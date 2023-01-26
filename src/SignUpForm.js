@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 /**
  * SignUp Form
  *{username, firstName, lastName, password, email}
+ TODO: add more information about whats happening in this function (and LoginForm).
  */
 function SignUpForm({ signUp }) {
   const [formData, setFormData] = useState({
@@ -24,7 +25,7 @@ function SignUpForm({ signUp }) {
       [name]: value,
     }));
   }
-
+  //TODO: look at login form todos.
   /** on form submission calls parent function and redirects to home*/
   function handleSubmit(evt) {
     evt.preventDefault();

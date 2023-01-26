@@ -28,6 +28,7 @@ function App() {
 
   useEffect(fetchUserData, [token]);
 
+  //TODO: add specific error state just for App.js
 
   /** triggers from token useEffect
    * fetches user data from the API with username in token
@@ -37,9 +38,9 @@ function App() {
   function fetchUserData() {
     async function fetchUser() {
       if (token) {
-        setUser((curr) => ({ ...curr, isLoading: true }));
+        // setUser((curr) => ({ ...curr, isLoading: true })); //redundant
         try {
-          // decode token and destruct username
+          // decode token and destructure username
           const decoded = jwt_decode(token);
           const { username } = decoded;
           JoblyApi.token = token;
@@ -55,7 +56,7 @@ function App() {
             isLoading: false,
             errors: err,
           });
-        }
+        } //add else statement if there is no token and set isLoading to false.
       }
     }
     fetchUser();
@@ -66,13 +67,13 @@ function App() {
    * sets token api response
    */
   async function login(data) {
-    const response = await JoblyApi.login(data);
-    setToken(response.token);
+    const token = await JoblyApi.login(data);
+    setToken(token);
   }
 
   /** logs out user */
   function logout() {
-    setUser((curr) => ({ ...curr, data: null }));
+    // setUser((curr) => ({ ...curr, data: null })); //can remove redundant
     setToken(null);
   }
   /** function for signing up user
@@ -80,8 +81,8 @@ function App() {
    * sets token and user state.
    */
   async function signUp(data) {
-    const response = await JoblyApi.signUp(data);
-    setToken(response.token);
+    const token = await JoblyApi.signUp(data);
+    setToken(token);
   }
 
   if (user.isLoading) return <Loading />;

@@ -21,7 +21,8 @@ function LoginForm({ login }) {
       [name]: value,
     }));
   }
-
+  //TODO: make async try catch login and await login
+  //make state for errors and make error component to display errors
   /** on form submission calls parent function and redirects to home*/
   function handleSubmit(evt) {
     evt.preventDefault();
