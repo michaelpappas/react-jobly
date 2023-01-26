@@ -18,32 +18,40 @@ import jwt_decode from "jwt-decode";
  * App -> {NavBar, RouteList}
  */
 function App() {
-
-  //user.data will contain user
   const [user, setUser] = useState({
     data: null,
-    isLoading: true,
-    errors: null
+    isLoading: false,
+    errors: null,
   });
   const [token, setToken] = useState("");
-
   // fetch token from local storage
 
   useEffect(fetchUserData, [token]);
 
   function fetchUserData() {
     async function fetchUser() {
-      try {
-        const { username } = jwt_decode(token);
-        const resp = await JoblyApi.getUser(username);
-        setUser(curr => ({ ...curr, data: resp }));
-      }
-      catch (err) {
-        setUser({
-          data: null,
-          isLoading: false,
-          errors: err
-        });
+      if (token) {
+        setUser((curr) => ({ ...curr, isLoading: true }));
+        try {
+          // decode token and destruct username
+          const decoded = jwt_decode(token);
+          const { username } = decoded;
+          JoblyApi.token = token;
+          console.log('token',token);
+          console.log('username',username);
+          // use username from payload to request user data from API
+          const resp = await JoblyApi.getUser(username);
+          console.log('resp',resp);
+          // update user with user data
+          setUser((curr) => ({ ...curr, data: resp, isLoading: false }));
+
+        } catch (err) {
+          setUser({
+            data: null,
+            isLoading: false,
+            errors: err,
+          });
+        }
       }
     }
     fetchUser();
@@ -54,50 +62,37 @@ function App() {
    * sets token api response
    */
   async function login(data) {
-
     const response = await JoblyApi.login(data);
-    setToken(response);
+    setToken(response.token);
   }
 
   /** logs out user */
   function logout() {
-    setUser({ data: null });
+    setUser((curr) => ({ ...curr, data: null }));
     setToken(null);
   }
   /** function for signing up user
    * must pass an object like {username, firstName, lastName, password, email}
    * sets token and user state.
-  */
+   */
   async function signUp(data) {
-    try {
-      const response = await JoblyApi.signUp(data);
-      setUser({
-        data: { username: data.username },
-        isLoading: false,
-        errors: null
-      });
-      setToken(response);
-    }
-    catch {
-
-    }
+    const response = await JoblyApi.signUp(data);
+    setToken(response);
   }
 
-
   if (user.isLoading) return <Loading />;
-  else if (user.errors) return <b> Error: {user.errors}</b>;
-
+  else if (user.errors) return <div>{user.errors.message}</div>;
 
   return (
     <userContext.Provider value={{ user }}>
       <div className="App">
         <BrowserRouter>
           <NavBar />
-          <RouteList />
+          <RouteList login={login} />
         </BrowserRouter>
       </div>
     </userContext.Provider>
   );
-};
+}
 
 export default App;
