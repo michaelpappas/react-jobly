@@ -23,8 +23,9 @@ function App() {
     isLoading: false,
     errors: null,
   });
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(localStorage.token || '');
   // fetch token from local storage
+
 
   useEffect(fetchUserData, [token]);
 
@@ -62,6 +63,12 @@ function App() {
     fetchUser();
   }
 
+  /** stores token in local storage sets token state  */
+  function handleToken(token) {
+    setToken(token);
+    localStorage.setItem("token", token);
+  }
+
   /** function for logging in
    * must pass an object like {username, password}
    * sets token api response
@@ -69,12 +76,15 @@ function App() {
   async function login(data) {
     const token = await JoblyApi.login(data);
     setToken(token);
+    // const response = await JoblyApi.login(data);
+    // handleToken(response.token);
   }
 
   /** logs out user */
   function logout() {
     // setUser((curr) => ({ ...curr, data: null })); //can remove redundant
     setToken(null);
+    localStorage.removeItem("token");
   }
   /** function for signing up user
    * must pass an object like {username, firstName, lastName, password, email}
@@ -83,6 +93,8 @@ function App() {
   async function signUp(data) {
     const token = await JoblyApi.signUp(data);
     setToken(token);
+    // const response = await JoblyApi.signUp(data);
+    // handleToken(response.token);
   }
 
   if (user.isLoading) return <Loading />;

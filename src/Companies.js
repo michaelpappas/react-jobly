@@ -1,8 +1,12 @@
+import { Navigate } from "react-router-dom";
+
 import SearchBar from "./SearchBar";
 import CompanyList from "./CompanyList";
 import Loading from "./Loading";
 import JoblyApi from "./api";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import userContext from "./userContext";
+
 /**
  * Companies - Renders CompaniesList and SearchBar
  *
@@ -10,7 +14,14 @@ import { useState, useEffect } from "react";
  * - Companies - Array of company obj like [{handle, name, numEmployees,... }]
  */
 function Companies() {
+
+  const { user } = useContext(userContext);
+
+
+
   const [companies, setCompanies] = useState({ data: [], isLoading: true, errors: null });
+
+
 
   useEffect(fetchCompaniesOnMount, []);
 
@@ -36,6 +47,8 @@ function Companies() {
   function handleSearch(searchTerm) {
     fetchCompaniesOnMount(searchTerm);
   }
+
+  if (!user) return <Navigate to="/" />;
 
   if (companies.isLoading) return <Loading />;
   else if (companies.errors) return <b> Error: {companies.errors}</b>;
