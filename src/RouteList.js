@@ -7,6 +7,7 @@ import Jobs from "./Jobs";
 import LoginForm from "./LoginForm";
 import SignUpForm from "./SignUpForm";
 import userContext from "./userContext";
+import EditProfile from "./EditProfile";
 
 /**
  * Routes for Jobly App
@@ -14,19 +15,25 @@ import userContext from "./userContext";
  */
 
 function RouteList({ login, signUp }) {
-
   const { user } = useContext(userContext);
 
   return (
     <Routes>
       <Route element={<HomePage />} path="/" />
-      {user && <>
-        <Route element={<Companies />} path="/companies" />
-        <Route element={<CompanyDetail />} path="/companies/:handle" />
-        <Route element={<Jobs />} path="/jobs" /></>}
-      {!user && <>
-        <Route element={<LoginForm login={login} />} path="/login" />
-        <Route element={<SignUpForm signUp={signUp} />} path="/signup" /></>}
+      {user && (
+        <>
+          <Route element={<Companies />} path="/companies" />
+          <Route element={<CompanyDetail />} path="/companies/:handle" />
+          <Route element={<Jobs />} path="/jobs" />
+          <Route element={<EditProfile />} path="/profile" />
+        </>
+      )}
+      {!user && (
+        <>
+          <Route element={<LoginForm login={login} />} path="/login" />
+          <Route element={<SignUpForm signUp={signUp} />} path="/signup" />
+        </>
+      )}
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );

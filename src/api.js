@@ -64,18 +64,21 @@ class JoblyApi {
     let res = await this.request("auth/token", data, "post");
     return res.token;
   }
-  /** */
+  /** Signs up a user */
   static async signUp(data) {
     let res = await this.request("auth/register", data, "post");
     return res.token;
   }
 
+  static async updateUser(data, username) {
+    let res = await this.request(`users/${username}`, data, "patch");
+    return res.user;
+  }
   /** get user information from API with username argument
    * returns user object like { username, firstName, lastName, isAdmin, jobs }
    */
   static async getUser(user) {
     let res = await this.request(`users/${user}`);
-    console.log("res", res);
     return res.user;
   }
 

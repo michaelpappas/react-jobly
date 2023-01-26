@@ -9,6 +9,8 @@ import jwt_decode from "jwt-decode";
 import Errors from "./Errors";
 const LOCAL_STORAGE_TOKEN = "token";
 /**
+ * App: Renders Navbar and Routelist
+ *
  * state:
  * - user - contains data like  {username, firstName, lastName, isAdmin, jobs}
  *          isLoading boolean
@@ -16,7 +18,6 @@ const LOCAL_STORAGE_TOKEN = "token";
  * - token - contains JWT used for authentication in the form of a string
  * - errors - array of errors from API to display
  *
- * App: Renders Navbar and Routelist
  * App -> {NavBar, RouteList}
  */
 function App() {
@@ -27,7 +28,6 @@ function App() {
 
   const [errors, setErrors] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("token") || "");
-  // fetch token from local storage
 
   useEffect(fetchUserData, [token]);
 
@@ -67,10 +67,10 @@ function App() {
     fetchUser();
   }
 
-  /** stores token in local storage sets token state  */
+  /** Stores token in local storage sets token state  */
   function handleToken(token) {
     setToken(token);
-    localStorage.setItem("token", token);
+    localStorage.setItem(LOCAL_STORAGE_TOKEN, token);
   }
 
   /** function for logging in
@@ -85,8 +85,17 @@ function App() {
   /** logs out user */
   function logout() {
     setToken(null);
-    localStorage.removeItem("token");
+    localStorage.removeItem(LOCAL_STORAGE_TOKEN);
   }
+
+  // /** update profile */
+  // async function updateProfile(data) {
+  //   console.log('user.username',user.data.username);
+  //   const updateUser = await JoblyApi.updateUser(data, user.data.username);
+  //   setUser(updateUser);
+  // }
+
+
   /** function for signing up user
    * must pass an object like {username, firstName, lastName, password, email}
    * sets token and user state.
