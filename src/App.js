@@ -1,4 +1,4 @@
-import { BrowserRouter, useNavigate } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import RouteList from "./RouteList";
 import NavBar from "./NavBar";
 import { useState, useEffect } from "react";
@@ -6,6 +6,7 @@ import userContext from "./userContext";
 import JoblyApi from "./api";
 import Loading from "./Loading";
 import jwt_decode from "jwt-decode";
+import Error from "./Error";
 
 /**
  * state:
@@ -13,6 +14,7 @@ import jwt_decode from "jwt-decode";
  *          isLoading boolean
  *          errors
  * - token - contains JWT used for authentication in the form of a string
+ * - errors - array of errors from API to display
  *
  * App: Renders Navbar and Routelist
  * App -> {NavBar, RouteList}
@@ -21,25 +23,22 @@ function App() {
   const [user, setUser] = useState({
     data: null,
     isLoading: false,
-    errors: null,
   });
-  const [token, setToken] = useState(localStorage.token || '');
+
+  const [errors, setErrors] = useState([]);
+  const [token, setToken] = useState(localStorage.token || "");
   // fetch token from local storage
 
-
   useEffect(fetchUserData, [token]);
-
-  //TODO: add specific error state just for App.js
 
   /** triggers from token useEffect
    * fetches user data from the API with username in token
    * sets user state to api user data response.
    * like: {username, firstName, lastName, isAdmin, jobs}
-  */
+   */
   function fetchUserData() {
     async function fetchUser() {
       if (token) {
-        // setUser((curr) => ({ ...curr, isLoading: true })); //redundant
         try {
           // decode token and destructure username
           const decoded = jwt_decode(token);
@@ -52,12 +51,17 @@ function App() {
           // update user with user data
           setUser((curr) => ({ ...curr, data: resp, isLoading: false }));
         } catch (err) {
+          setErrors(err);
           setUser({
             data: null,
             isLoading: false,
-            errors: err,
           });
-        } //add else statement if there is no token and set isLoading to false.
+        }
+      } else {
+        setUser({
+          data: null,
+          isLoading: false,
+        });
       }
     }
     fetchUser();
@@ -75,14 +79,11 @@ function App() {
    */
   async function login(data) {
     const token = await JoblyApi.login(data);
-    setToken(token);
-    // const response = await JoblyApi.login(data);
-    // handleToken(response.token);
+    handleToken(token);
   }
 
   /** logs out user */
   function logout() {
-    // setUser((curr) => ({ ...curr, data: null })); //can remove redundant
     setToken(null);
     localStorage.removeItem("token");
   }
@@ -92,13 +93,10 @@ function App() {
    */
   async function signUp(data) {
     const token = await JoblyApi.signUp(data);
-    setToken(token);
-    // const response = await JoblyApi.signUp(data);
-    // handleToken(response.token);
+    handleToken(token);
   }
 
   if (user.isLoading) return <Loading />;
-  else if (user.errors) return <div>{user.errors.message}</div>;
 
   return (
     <div className="App">
@@ -106,6 +104,9 @@ function App() {
         <BrowserRouter>
           <NavBar logout={logout} />
           <div className="container mt-5">
+            {errors.map((error, i) => (
+              <Error key={i} error={error} />
+            ))}
             <RouteList login={login} signUp={signUp} />
           </div>
         </BrowserRouter>

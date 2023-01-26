@@ -1,15 +1,22 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import Error from "./Error";
 /**
  * Login Form
- * TODO: add form error handling and validation
+ *
+ * Props:
+ * - Login - function to call from parent
+ *
+ * App -> RouteList -> LoginForm
  */
+
 function LoginForm({ login }) {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+
+  const [errors, setErrors] = useState([]);
 
   const navigate = useNavigate();
 
@@ -21,17 +28,23 @@ function LoginForm({ login }) {
       [name]: value,
     }));
   }
-  //TODO: make async try catch login and await login
   //make state for errors and make error component to display errors
   /** on form submission calls parent function and redirects to home*/
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    login(formData);
-    navigate("/");
+    try {
+      await login(formData);
+      navigate("/");
+    } catch (err) {
+      setErrors(err);
+    }
   }
 
   return (
     <div className="w-50 m-auto">
+      {errors.map((error, i) => (
+        <Error key={i} error={error} />
+      ))}
       <div className="card">
         <form onSubmit={handleSubmit} className="card-body form-group">
           <h5 className="card-title">Login</h5>

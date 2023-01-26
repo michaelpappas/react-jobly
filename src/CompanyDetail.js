@@ -1,20 +1,31 @@
-import { useEffect, useState } from "react";
+
+import { Navigate } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import userContext from "./userContext";
 import { useParams } from "react-router-dom";
 import JoblyApi from "./api";
 import JobList from "./JobList";
 import Loading from "./Loading";
+import Error from "./Error";
 
 /**
  * Display Jobs and company details from a specific company
  * State:
  * - company - a company object like { handle, name, numEmployees, jobs }
  *    jobs - a list of objects like { id, title, salary, equity }
+ * - errors - array of errors from API to display
  */
 function CompanyDetail() {
+  const { user } = useContext(userContext);
 
   const { handle } = useParams();
 
-  const [company, setCompany] = useState({ data: {}, isLoading: true, errors: null });
+  const [company, setCompany] = useState({
+    data: {},
+    isLoading: true,
+  });
+
+  const [errors, setErrors] = useState([]);
 
   useEffect(fetchCompanyOnMount, [handle]);
 
@@ -24,21 +35,28 @@ function CompanyDetail() {
       try {
         const response = await JoblyApi.getCompany(handle);
         setCompany({ data: response, isLoading: false });
-      }
-      catch (err) {
+      } catch (err) {
         setCompany({
           data: null,
           isLoading: false,
-          errors: err
         });
+        setErrors(err)
       }
     }
     fetchCompany();
   }
-
+  if (!user) return <Navigate to="/" />;
 
   if (company.isLoading) return <Loading />;
-  else if (company.errors) return <b> Error: {company.errors}</b>;
+
+  if (errors.length)
+    return (
+      <>
+        {errors.map((error, i) => (
+          <Error key={i} error={error} />
+        ))}
+      </>
+    );
 
   return (
     <div>
@@ -47,6 +65,6 @@ function CompanyDetail() {
       <JobList jobs={company.data.jobs} />
     </div>
   );
-};
+}
 
 export default CompanyDetail;

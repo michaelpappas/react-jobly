@@ -1,10 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Error from "./Error";
 
 /**
  * SignUp Form
- *{username, firstName, lastName, password, email}
- TODO: add more information about whats happening in this function (and LoginForm).
+ *
+ * Props: signUp - function to call from parent
+ *
+ * State:
+ * - formData - input changing
+ * - errors - array of errors from API to display
+ *
+ *  * App -> RouteList -> SignupForm
  */
 function SignUpForm({ signUp }) {
   const [formData, setFormData] = useState({
@@ -14,6 +21,8 @@ function SignUpForm({ signUp }) {
     password: "",
     email: "",
   });
+
+  const [errors, setErrors] = useState([]);
 
   const navigate = useNavigate();
 
@@ -25,16 +34,22 @@ function SignUpForm({ signUp }) {
       [name]: value,
     }));
   }
-  //TODO: look at login form todos.
   /** on form submission calls parent function and redirects to home*/
-  function handleSubmit(evt) {
+  async function handleSubmit(evt) {
     evt.preventDefault();
-    signUp(formData);
-    navigate("/");
+    try {
+      await signUp(formData);
+      navigate("/");
+    } catch (err) {
+      setErrors(err);
+    }
   }
 
   return (
     <div className="w-50 m-auto">
+      {errors.map((error, i) => (
+        <Error key={i} error={error} />
+      ))}
       <div className="card">
         <form onSubmit={handleSubmit} className="card-body form-group">
           <h5 className="card-title">Sign Up</h5>
