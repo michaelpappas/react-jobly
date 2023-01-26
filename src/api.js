@@ -66,8 +66,8 @@ class JoblyApi {
   }
   /** */
   static async signUp(data) {
-    let res = await this.request("auth/register", data);
-    return res
+    let res = await this.request("auth/register", data, "post");
+    return res;
   }
 
   /** get user information from API with username argument
@@ -75,7 +75,8 @@ class JoblyApi {
    */
   static async getUser(user) {
     let res = await this.request(`users/${user}`);
-    return res;
+    console.log("res", res);
+    return res.user;
   }
 
 }

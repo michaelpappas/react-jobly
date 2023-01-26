@@ -1,18 +1,17 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 /**
- * Login Form
- * TODO: add form error handling and validation
+ * SignUp Form
+ *{username, firstName, lastName, password, email}
  */
-function LoginForm({ login }) {
+function SignUpForm({ signUp }) {
   const [formData, setFormData] = useState({
     username: "",
+    firstName: "",
+    lastName: "",
     password: "",
+    email: ""
   });
-
-  const navigate = useNavigate();
-
   function handleChange(evt) {
     const { name, value } = evt.target;
     setFormData((data) => ({
@@ -23,8 +22,7 @@ function LoginForm({ login }) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    login(formData);
-    navigate("/");
+    signUp(formData);
   }
 
   return (
@@ -45,9 +43,33 @@ function LoginForm({ login }) {
         onChange={handleChange}
         value={formData.password}
       />
-      <button>Login</button>
+      <input
+        name="firstName"
+        placeholder="firstName"
+        type="text"
+        id="firstName"
+        onChange={handleChange}
+        value={formData.firstName}
+      />
+      <input
+        name="lastName"
+        placeholder="lastName"
+        type="text"
+        id="lastName"
+        onChange={handleChange}
+        value={formData.lastName}
+      />
+      <input
+        name="email"
+        placeholder="email"
+        type="email"
+        id="email"
+        onChange={handleChange}
+        value={formData.email}
+      />
+      <button>Sign Up</button>
     </form>
   );
 }
 
-export default LoginForm;
+export default SignUpForm;

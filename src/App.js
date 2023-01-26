@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useNavigate } from "react-router-dom";
 import RouteList from "./RouteList";
 import NavBar from "./NavBar";
 import { useState, useEffect } from "react";
@@ -28,6 +28,7 @@ function App() {
 
   useEffect(fetchUserData, [token]);
 
+
   function fetchUserData() {
     async function fetchUser() {
       if (token) {
@@ -37,11 +38,10 @@ function App() {
           const decoded = jwt_decode(token);
           const { username } = decoded;
           JoblyApi.token = token;
-          console.log('token',token);
-          console.log('username',username);
+
           // use username from payload to request user data from API
           const resp = await JoblyApi.getUser(username);
-          console.log('resp',resp);
+
           // update user with user data
           setUser((curr) => ({ ...curr, data: resp, isLoading: false }));
 
@@ -64,6 +64,7 @@ function App() {
   async function login(data) {
     const response = await JoblyApi.login(data);
     setToken(response.token);
+
   }
 
   /** logs out user */
@@ -77,18 +78,18 @@ function App() {
    */
   async function signUp(data) {
     const response = await JoblyApi.signUp(data);
-    setToken(response);
+    setToken(response.token);
   }
 
   if (user.isLoading) return <Loading />;
   else if (user.errors) return <div>{user.errors.message}</div>;
 
   return (
-    <userContext.Provider value={{ user }}>
+    <userContext.Provider value={{ user: user.data }}>
       <div className="App">
         <BrowserRouter>
-          <NavBar />
-          <RouteList login={login} />
+          <NavBar logout={logout} />
+          <RouteList login={login} signUp={signUp} />
         </BrowserRouter>
       </div>
     </userContext.Provider>
