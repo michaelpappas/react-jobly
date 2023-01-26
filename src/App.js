@@ -6,8 +6,8 @@ import userContext from "./userContext";
 import JoblyApi from "./api";
 import Loading from "./Loading";
 import jwt_decode from "jwt-decode";
-import Error from "./Error";
-
+import Errors from "./Errors";
+const LOCAL_STORAGE_TOKEN = "token";
 /**
  * state:
  * - user - contains data like  {username, firstName, lastName, isAdmin, jobs}
@@ -26,7 +26,7 @@ function App() {
   });
 
   const [errors, setErrors] = useState([]);
-  const [token, setToken] = useState(localStorage.token || "");
+  const [token, setToken] = useState(localStorage.getItem("token") || "");
   // fetch token from local storage
 
   useEffect(fetchUserData, [token]);
@@ -104,9 +104,7 @@ function App() {
         <BrowserRouter>
           <NavBar logout={logout} />
           <div className="container mt-5">
-            {errors.map((error, i) => (
-              <Error key={i} error={error} />
-            ))}
+            {errors.length !== 0 && <Errors errors={errors} />}
             <RouteList login={login} signUp={signUp} />
           </div>
         </BrowserRouter>

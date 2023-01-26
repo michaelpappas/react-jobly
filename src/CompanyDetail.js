@@ -1,12 +1,9 @@
-
-import { Navigate } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
-import userContext from "./userContext";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import JoblyApi from "./api";
 import JobList from "./JobList";
 import Loading from "./Loading";
-import Error from "./Error";
+import Errors from "./Errors";
 
 /**
  * Display Jobs and company details from a specific company
@@ -16,7 +13,6 @@ import Error from "./Error";
  * - errors - array of errors from API to display
  */
 function CompanyDetail() {
-  const { user } = useContext(userContext);
 
   const { handle } = useParams();
 
@@ -40,23 +36,15 @@ function CompanyDetail() {
           data: null,
           isLoading: false,
         });
-        setErrors(err)
+        setErrors(err);
       }
     }
     fetchCompany();
   }
-  if (!user) return <Navigate to="/" />;
 
   if (company.isLoading) return <Loading />;
 
-  if (errors.length)
-    return (
-      <>
-        {errors.map((error, i) => (
-          <Error key={i} error={error} />
-        ))}
-      </>
-    );
+  if (errors.length) return <Errors errors={errors} />;
 
   return (
     <div>

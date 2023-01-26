@@ -1,11 +1,10 @@
-import { Navigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import CompanyList from "./CompanyList";
 import Loading from "./Loading";
 import JoblyApi from "./api";
-import { useState, useEffect, useContext } from "react";
-import userContext from "./userContext";
-import Error from "./Error";
+import { useState, useEffect } from "react";
+
+import Errors from "./Errors";
 
 /**
  * Companies - Renders CompaniesList and SearchBar
@@ -15,7 +14,6 @@ import Error from "./Error";
  * - errors - array of errors from API to display
  */
 function Companies() {
-  const { user } = useContext(userContext);
 
   const [companies, setCompanies] = useState({
     data: [],
@@ -48,18 +46,9 @@ function Companies() {
     fetchCompaniesOnMount(searchTerm);
   }
 
-  if (!user) return <Navigate to="/" />;
-
   if (companies.isLoading) return <Loading />;
 
-  if (errors.length)
-    return (
-      <>
-        {errors.map((error, i) => (
-          <Error key={i} error={error} />
-        ))}
-      </>
-    );
+  if (errors.length) return <Errors errors={errors} />;
 
   return (
     <div>

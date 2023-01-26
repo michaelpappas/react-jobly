@@ -1,11 +1,9 @@
-import { Navigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import Loading from "./Loading";
 import JoblyApi from "./api";
-import { useState, useEffect, useContext } from "react";
-import userContext from "./userContext";
+import { useState, useEffect } from "react";
 import JobList from "./JobList";
-import Error from "./Error";
+import Errors from "./Errors";
 
 /**
  * Renders JobList and SearchBar
@@ -14,7 +12,6 @@ import Error from "./Error";
  * - errors - array of errors from API to display
  */
 function Jobs() {
-  const { user } = useContext(userContext);
 
   const [jobs, setJobs] = useState({
     data: [],
@@ -47,18 +44,9 @@ function Jobs() {
     fetchJobsOnMount(searchTerm);
   }
 
-  if (!user) return <Navigate to="/" />;
-
   if (jobs.isLoading) return <Loading />;
 
-  if (errors.length)
-    return (
-      <>
-        {errors.map((error, i) => (
-          <Error key={i} error={error} />
-        ))}
-      </>
-    );
+  if (errors.length) return <Errors errors={errors} />;
 
   return (
     <div className="Jobs">

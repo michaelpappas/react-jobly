@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Error from "./Error";
+import Errors from "./Errors";
 
 /**
  * SignUp Form
@@ -47,9 +47,7 @@ function SignUpForm({ signUp }) {
 
   return (
     <div className="w-50 m-auto">
-      {errors.map((error, i) => (
-        <Error key={i} error={error} />
-      ))}
+      {errors.length !== 0 && <Errors errors={errors} />}
       <div className="card">
         <form onSubmit={handleSubmit} className="card-body form-group">
           <h5 className="card-title">Sign Up</h5>

@@ -6,7 +6,7 @@ import { useContext } from "react";
  * App -> NavBar
  */
 function NavBar({ logout }) {
-  const { user } = useContext(userContext);
+  const { user } = useContext(userContext); //TODO: ternary to call either of two functions that return either auth or non-auth links
   return (
     <nav className="navbar justify-content-between navbar-expand navbar-dark bg-dark">
       <NavLink className="navbar-brand" to="/">Jobly</NavLink>
