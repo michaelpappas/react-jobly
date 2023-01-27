@@ -47,7 +47,6 @@ function App() {
 
           // use username from payload to request user data from API
           const resp = await JoblyApi.getUser(username);
-          console.log(resp);
           // update user with user data
           setUser((curr) => ({ ...curr, data: resp, isLoading: false }));
         } catch (err) {
