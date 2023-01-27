@@ -1,12 +1,12 @@
 import { BrowserRouter } from "react-router-dom";
-import RouteList from "./RouteList";
-import NavBar from "./NavBar";
+import RouteList from "./Nav/RouteList";
+import NavBar from "./Nav/NavBar";
 import { useState, useEffect } from "react";
-import userContext from "./userContext";
+import userContext from "./User/userContext";
 import JoblyApi from "./api";
-import Loading from "./Loading";
+import Loading from "./Utilities/Loading";
 import jwt_decode from "jwt-decode";
-import Errors from "./Errors";
+import Errors from "./Utilities/Errors";
 import "./App.css";
 
 const LOCAL_STORAGE_TOKEN = "token";

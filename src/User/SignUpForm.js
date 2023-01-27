@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Errors from "./Errors";
+import Errors from "../Utilities/Errors";
 
 /**
  * SignUp Form

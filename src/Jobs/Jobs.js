@@ -1,9 +1,9 @@
-import SearchBar from "./SearchBar";
-import Loading from "./Loading";
-import JoblyApi from "./api";
+import SearchBar from "../Utilities/SearchBar";
+import Loading from "../Utilities/Loading";
+import JoblyApi from "../api";
 import { useState, useEffect } from "react";
 import JobList from "./JobList";
-import Errors from "./Errors";
+import Errors from "../Utilities/Errors";
 
 /**
  * Renders JobList and SearchBar

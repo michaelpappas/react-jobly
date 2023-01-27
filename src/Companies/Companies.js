@@ -1,10 +1,10 @@
-import SearchBar from "./SearchBar";
+import SearchBar from "../Utilities/SearchBar";
 import CompanyList from "./CompanyList";
-import Loading from "./Loading";
-import JoblyApi from "./api";
+import Loading from "../Utilities/Loading";
+import JoblyApi from "../api";
 import { useState, useEffect } from "react";
 
-import Errors from "./Errors";
+import Errors from "../Utilities/Errors";
 
 /**
  * Companies - Renders CompaniesList and SearchBar

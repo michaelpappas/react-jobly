@@ -1,7 +1,7 @@
-import userContext from "./userContext";
+import userContext from "../User/userContext";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import "./HomePage.css"
+import "./HomePage.css";
 /**
  * Renders HomePage
  * App -> RouteList -> HomePage

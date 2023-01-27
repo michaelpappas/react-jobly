@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import JoblyApi from "./api";
-import JobList from "./JobList";
-import Loading from "./Loading";
-import Errors from "./Errors";
+import JoblyApi from "../api";
+import JobList from "../Jobs/JobList";
+import Loading from "../Utilities/Loading";
+import Errors from "../Utilities/Errors";
 
 /**
  * Display Jobs and company details from a specific company

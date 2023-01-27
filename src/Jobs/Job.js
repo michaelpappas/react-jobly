@@ -1,7 +1,7 @@
-import userContext from "./userContext";
+import userContext from "../User/userContext";
 import { useContext, useState } from "react";
-import Errors from "./Errors";
-import JoblyApi from "./api";
+import Errors from "../Utilities/Errors";
+import JoblyApi from "../api";
 
 
 /**
@@ -16,10 +16,10 @@ function Job({ job }) {
 
   async function applyForJob(evt) {
     evt.preventDefault();
-    try{
+    try {
       await JoblyApi.applyToJob(username, job.id);
       const updatedUser = await JoblyApi.getUser(username);
-      setUser((curr)=>({...curr, data: updatedUser}));
+      setUser((curr) => ({ ...curr, data: updatedUser }));
 
     } catch (err) {
       setErrors(err);

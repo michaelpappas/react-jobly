@@ -1,7 +1,7 @@
 import userContext from "./userContext";
 import { useContext, useState } from "react";
-import Errors from "./Errors";
-import JoblyApi from "./api";
+import Errors from "../Utilities/Errors";
+import JoblyApi from "../api";
 
 /**
  * Edit profile form
