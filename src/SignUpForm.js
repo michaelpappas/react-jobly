@@ -51,46 +51,46 @@ function SignUpForm({ signUp }) {
       <div className="card">
         <form onSubmit={handleSubmit} className="card-body form-group">
           <h5 className="card-title">Sign Up</h5>
+          <label htmlFor="username" className="form-label">Username</label>
           <input
             className="form-control mb-2"
             name="username"
-            placeholder="Username"
             type="text"
             id="username"
             onChange={handleChange}
             value={formData.username}
           />
+          <label htmlFor="password" className="form-label">Password</label>
           <input
             className="form-control mb-2"
             name="password"
-            placeholder="Password"
             type="password"
             id="password"
             onChange={handleChange}
             value={formData.password}
           />
+          <label htmlFor="firstName" className="form-label">First Name</label>
           <input
             className="form-control mb-2"
             name="firstName"
-            placeholder="First Name"
             type="text"
             id="firstName"
             onChange={handleChange}
             value={formData.firstName}
           />
+          <label htmlFor="lastName" className="form-label">Last Name</label>
           <input
             className="form-control mb-2"
             name="lastName"
-            placeholder="Last Name"
             type="text"
             id="lastName"
             onChange={handleChange}
             value={formData.lastName}
           />
+          <label htmlFor="email" className="form-label">Email</label>
           <input
             className="form-control mb-2"
             name="email"
-            placeholder="Email"
             type="email"
             id="email"
             onChange={handleChange}

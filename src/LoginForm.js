@@ -46,19 +46,19 @@ function LoginForm({ login }) {
       <div className="card">
         <form onSubmit={handleSubmit} className="card-body form-group">
           <h5 className="card-title">Login</h5>
+          <label htmlFor="username" className="form-label">Username</label>
           <input
             className="form-control mb-2"
             name="username"
-            placeholder="username"
             type="text"
             id="username"
             onChange={handleChange}
             value={formData.username}
           />
+          <label htmlFor="password" className="form-label">Password</label>
           <input
             className="form-control mb-2"
             name="password"
-            placeholder="password"
             type="password"
             id="password"
             onChange={handleChange}

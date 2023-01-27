@@ -14,7 +14,7 @@ import JoblyApi from "./api";
  * App -> RouteList -> EditProfile
  */
 function EditProfile() {
-  const { user } = useContext(userContext);
+  const { user, setUser } = useContext(userContext);
 
   const initialForm = {
     firstName: user.firstName,
@@ -36,16 +36,19 @@ function EditProfile() {
   }
 
   /** On submit, calls JoblyApi method for updating a user,
+   * calls setUser with updated user information from API patch
    * setSuccess to true if successful, setsErrors if errs
    */
   async function handleSubmit(evt) {
     evt.preventDefault();
     try {
-      await JoblyApi.updateUser(formData, user.username);
+      debugger;
+      const updatedUser = await JoblyApi.updateUser(formData, user.username);
+      const newUserData = { ...updatedUser, applications: user.applications };
       setSuccess(true);
-      // How do we update user from a component using userContext?
-      // setUser((curr)=> {...cur, data.firstName: formData.firstName, data.lastName: formData.lastName,data.email: formData.email, })
-    } catch (err) {
+      setUser((curr) => ({ ...curr, data: newUserData }));
+    }
+    catch (err) {
       setSuccess(false);
       setErrors(err);
     }
@@ -57,28 +60,28 @@ function EditProfile() {
       <div className="card">
         <form onSubmit={handleSubmit} className="card-body form-group">
           <h5 className="card-title">Profile</h5>
+          <label htmlFor="username" className="form-label">Username</label>
           <input
             className="form-control mb-2"
             name="username"
-            placeholder="Username"
             type="text"
             id="username"
             disabled
             value={user.username}
           />
+          <label htmlFor="firstName" className="form-label">First Name</label>
           <input
             className="form-control mb-2"
             name="firstName"
-            placeholder="First Name"
             type="text"
             id="firstName"
             onChange={handleChange}
             value={formData.firstName}
           />
+          <label htmlFor="lastName" className="form-label">Last Name</label>
           <input
             className="form-control mb-2"
             name="lastName"
-            placeholder="Last Name"
             type="text"
             id="lastName"
             onChange={handleChange}

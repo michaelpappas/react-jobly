@@ -47,7 +47,7 @@ function App() {
 
           // use username from payload to request user data from API
           const resp = await JoblyApi.getUser(username);
-
+          console.log(resp);
           // update user with user data
           setUser((curr) => ({ ...curr, data: resp, isLoading: false }));
         } catch (err) {
@@ -88,14 +88,6 @@ function App() {
     localStorage.removeItem(LOCAL_STORAGE_TOKEN);
   }
 
-  // /** update profile */
-  // async function updateProfile(data) {
-  //   console.log('user.username',user.data.username);
-  //   const updateUser = await JoblyApi.updateUser(data, user.data.username);
-  //   setUser(updateUser);
-  // }
-
-
   /** function for signing up user
    * must pass an object like {username, firstName, lastName, password, email}
    * sets token and user state.
@@ -109,7 +101,7 @@ function App() {
 
   return (
     <div className="App">
-      <userContext.Provider value={{ user: user.data }}>
+      <userContext.Provider value={{ user: user.data, setUser }}>
         <BrowserRouter>
           <NavBar logout={logout} />
           <div className="container mt-5">
