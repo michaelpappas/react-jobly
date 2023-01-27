@@ -16,3 +16,10 @@ useEffect on token state of the token
 9. request user informatin from the API using the username and token
 10. Set current user data to the api response with {username, firstName, lastName, isAdmin, jobs}
 11. Set user.isLoading to false.
+
+On Refresh:
+1. App.js line 104 we are setting userContext to user.data but user is null so null is set.
+2. App.js line 109 render RouteList where we reference userContext that is null
+3. Because we're trying to access a protected route but our user is falsey we are redirected to the catchall which takes us home.
+4. Home is rendered and useEffect is trigger calls setUser which does a re-render.
+5. during this time the public navbar is momentarily rendered then when the api response it renders the protected navbar showing the protected routes
