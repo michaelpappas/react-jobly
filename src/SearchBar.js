@@ -21,8 +21,8 @@ function SearchBar({ handleSearch }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="form-inline mb-4">
-      <div className="form-group">
+    <form onSubmit={handleSubmit} className="form-inline mb-4 w-25">
+      <div className="input-group">
         <input className="form-control" name="search" onChange={handleChange} value={searchTerm} placeholder="Enter search term..."/>
         <button className="btn btn-primary">Search</button>
       </div>

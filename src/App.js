@@ -7,6 +7,8 @@ import JoblyApi from "./api";
 import Loading from "./Loading";
 import jwt_decode from "jwt-decode";
 import Errors from "./Errors";
+import "./App.css";
+
 const LOCAL_STORAGE_TOKEN = "token";
 /**
  * App: Renders Navbar and Routelist
@@ -96,19 +98,21 @@ function App() {
     handleToken(token);
   }
 
-  if (user.isLoading) return <Loading />;
-
   return (
     <div className="App">
-      <userContext.Provider value={{ user: user.data, setUser }}>
-        <BrowserRouter>
-          <NavBar logout={logout} />
-          <div className="container mt-5">
-            {errors.length !== 0 && <Errors errors={errors} />}
-            <RouteList login={login} signUp={signUp} />
-          </div>
-        </BrowserRouter>
-      </userContext.Provider>
+      {user.isLoading ? (
+        <Loading />
+      ) : (
+        <userContext.Provider value={{ user: user.data, setUser }}>
+          <BrowserRouter>
+            <NavBar logout={logout} />
+            <div className="container mt-5">
+              {errors.length !== 0 && <Errors errors={errors} />}
+              <RouteList login={login} signUp={signUp} />
+            </div>
+          </BrowserRouter>
+        </userContext.Provider>
+      )}
     </div>
   );
 }

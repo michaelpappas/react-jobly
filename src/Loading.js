@@ -1,5 +1,15 @@
+import "./Loading.css";
+/**
+ * Shows loading spinner
+ */
 function Loading() {
-  return <h1>Loading...</h1>;
+  return (
+    <div className="Loading">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  );
 }
 
 export default Loading;

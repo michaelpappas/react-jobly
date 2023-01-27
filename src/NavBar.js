@@ -55,14 +55,13 @@ function NavBar({ logout }) {
   }
   return (
     <nav className="navbar justify-content-between navbar-expand navbar-dark bg-dark">
-      <NavLink className="navbar-brand" to="/">
-        Jobly
-      </NavLink>
-
-      <div>
-        <ul className="navbar-nav mr-auto">
-          {user ?  renderAuthNav()  :  renderUnauthNav() }
-        </ul>
+      <div className="container">
+        <NavLink className="navbar-brand" to="/">
+          Jobly
+        </NavLink>
+          <ul className="navbar-nav mr-auto">
+            {user ?  renderAuthNav()  :  renderUnauthNav() }
+          </ul>
       </div>
     </nav>
   );
