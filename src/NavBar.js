@@ -24,10 +24,10 @@ function NavBar({ logout }) {
           </NavLink>
         </li>
         <li className="nav-item">
-        <NavLink className="nav-link" to="/profile">
-          Profile
-        </NavLink>
-      </li>
+          <NavLink className="nav-link" to="/profile">
+            Profile
+          </NavLink>
+        </li>
         <li className="nav-item">
           <NavLink className="nav-link" onClick={logout} to="/">
             Logout
@@ -54,14 +54,14 @@ function NavBar({ logout }) {
     );
   }
   return (
-    <nav className="navbar justify-content-between navbar-expand navbar-dark bg-dark">
+    <nav className="Navbar navbar justify-content-between navbar-expand navbar-dark bg-dark">
       <div className="container">
         <NavLink className="navbar-brand" to="/">
           Jobly
         </NavLink>
-          <ul className="navbar-nav mr-auto">
-            {user ?  renderAuthNav()  :  renderUnauthNav() }
-          </ul>
+        <ul className="navbar-nav mr-auto">
+          {user ? renderAuthNav() : renderUnauthNav()}
+        </ul>
       </div>
     </nav>
   );

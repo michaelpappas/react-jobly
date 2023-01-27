@@ -1,8 +1,18 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('if app renders', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const splashPageText = screen.getByText("All the jobs in one, convenient place.");
+  expect(splashPageText).toBeInTheDocument();
 });
+
+// test('if app is rendering multiple components', () => {
+//   const { container } = render(<App />);
+//   const navbar = container.querySelector(".Navbar");
+//   expect(navbar).toBeInTheDocument();
+// });
+
+
+
+
