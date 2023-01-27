@@ -23,7 +23,7 @@ const LOCAL_STORAGE_TOKEN = "token";
 function App() {
   const [user, setUser] = useState({
     data: null,
-    isLoading: false,
+    isLoading: true,
   });
 
   const [errors, setErrors] = useState([]);
