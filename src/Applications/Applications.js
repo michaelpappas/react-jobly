@@ -43,7 +43,11 @@ function Applications() {
   return (
     <>
       <h2 className="mb-4">Applications</h2>
-      <JobList jobs={jobs.data} />
+      {jobs.data.length > 0 ? (
+        <JobList jobs={jobs.data} />
+      ) : (
+        <h4>No Applications</h4>
+      )}
     </>
   );
 }
