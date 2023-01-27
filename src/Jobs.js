@@ -12,7 +12,6 @@ import Errors from "./Errors";
  * - errors - array of errors from API to display
  */
 function Jobs() {
-
   const [jobs, setJobs] = useState({
     data: [],
     isLoading: true,
@@ -26,7 +25,7 @@ function Jobs() {
   function fetchJobsOnMount(search) {
     async function fetchJobs(search) {
       try {
-        const response = await JoblyApi.getJobs(search);
+        const response = await JoblyApi.getJobs(search || null);
         setJobs({ data: response, isLoading: false, errors: null });
       } catch (err) {
         setJobs({
@@ -51,7 +50,11 @@ function Jobs() {
   return (
     <div className="Jobs">
       <SearchBar handleSearch={handleSearch} />
-      <JobList jobs={jobs.data} />
+      {jobs.data.length > 0 ? (
+        <JobList jobs={jobs.data} />
+      ) : (
+        <h2>No results found</h2>
+      )}
     </div>
   );
 }

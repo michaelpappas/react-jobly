@@ -11,6 +11,9 @@ import EditProfile from "./EditProfile";
 
 /**
  * Routes for Jobly App
+ * Props:
+ * -login - login function to call in parent
+ * -signUp - signUp function to call in parent
  *  App -> RouteList -> {HomePage, Companies, CompanyDetail, Jobs}
  */
 

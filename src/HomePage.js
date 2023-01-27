@@ -1,7 +1,7 @@
 import userContext from "./userContext";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-
+import "./HomePage.css"
 /**
  * Renders HomePage
  * App -> RouteList -> HomePage
@@ -11,13 +11,13 @@ function HomePage() {
 
   // debugger;
   return (
-    <div className="homepage">
+    <div className="HomePage">
       <h1>Jobly</h1>
       <h3>All the jobs in one, convenient place.</h3>
       {user ? (
         <>{`Welcome back ${user.firstName}`}</>
       ) : (
-        <div className="homepage-btn">
+        <div className="HomePage-btn">
           <Link to="/login" className="btn btn-primary mr-2">
             Log in
           </Link>

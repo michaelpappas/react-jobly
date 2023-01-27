@@ -48,9 +48,9 @@ function SignUpForm({ signUp }) {
   return (
     <div className="w-50 m-auto">
       {errors.length !== 0 && <Errors errors={errors} />}
+      <h5 className="card-title">Sign Up</h5>
       <div className="card">
         <form onSubmit={handleSubmit} className="card-body form-group">
-          <h5 className="card-title">Sign Up</h5>
           <label htmlFor="username" className="form-label">Username</label>
           <input
             className="form-control mb-2"

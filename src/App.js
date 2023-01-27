@@ -82,7 +82,7 @@ function App() {
     handleToken(token);
   }
 
-  /** logs out user */
+  /** logs out user, setToken to null and remove token from local storage */
   function logout() {
     setToken(null);
     localStorage.removeItem(LOCAL_STORAGE_TOKEN);
