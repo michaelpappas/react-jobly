@@ -47,7 +47,6 @@ function App() {
 
           // use username from payload to request user data from API
           const resp = await JoblyApi.getUser(username);
-          console.log(resp);
           // update user with user data
           setUser((curr) => ({ ...curr, data: resp, isLoading: false }));
         } catch (err) {
@@ -82,7 +81,7 @@ function App() {
     handleToken(token);
   }
 
-  /** logs out user */
+  /** logs out user, setToken to null and remove token from local storage */
   function logout() {
     setToken(null);
     localStorage.removeItem(LOCAL_STORAGE_TOKEN);

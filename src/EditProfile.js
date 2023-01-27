@@ -41,26 +41,28 @@ function EditProfile() {
    */
   async function handleSubmit(evt) {
     evt.preventDefault();
+    setErrors([]);
     try {
-      debugger;
       const updatedUser = await JoblyApi.updateUser(formData, user.username);
       const newUserData = { ...updatedUser, applications: user.applications };
       setSuccess(true);
       setUser((curr) => ({ ...curr, data: newUserData }));
-    }
-    catch (err) {
+    } catch (err) {
       setSuccess(false);
       setErrors(err);
     }
   }
+
   return (
     <div className="EditProfile w-50 m-auto">
       {errors.length !== 0 && <Errors errors={errors} />}
       {success && <div className="alert alert-success">Updated profile!</div>}
+      <h5 className="card-title">Profile</h5>
       <div className="card">
         <form onSubmit={handleSubmit} className="card-body form-group">
-          <h5 className="card-title">Profile</h5>
-          <label htmlFor="username" className="form-label">Username</label>
+          <label htmlFor="username" className="form-label">
+            Username
+          </label>
           <input
             className="form-control mb-2"
             name="username"
@@ -69,7 +71,9 @@ function EditProfile() {
             disabled
             value={user.username}
           />
-          <label htmlFor="firstName" className="form-label">First Name</label>
+          <label htmlFor="firstName" className="form-label">
+            First Name
+          </label>
           <input
             className="form-control mb-2"
             name="firstName"
@@ -78,7 +82,9 @@ function EditProfile() {
             onChange={handleChange}
             value={formData.firstName}
           />
-          <label htmlFor="lastName" className="form-label">Last Name</label>
+          <label htmlFor="lastName" className="form-label">
+            Last Name
+          </label>
           <input
             className="form-control mb-2"
             name="lastName"
@@ -87,10 +93,12 @@ function EditProfile() {
             onChange={handleChange}
             value={formData.lastName}
           />
+          <label htmlFor="email" className="form-label">
+            Email
+          </label>
           <input
             className="form-control mb-2"
             name="email"
-            placeholder="Email"
             type="email"
             id="email"
             onChange={handleChange}
