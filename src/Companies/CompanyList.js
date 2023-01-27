@@ -1,4 +1,5 @@
 import Company from "./Company";
+import PaginatedItems from "../Utilities/Paginate";
 
 /**
  * CompanyList - renders list of Company comps
@@ -7,7 +8,7 @@ import Company from "./Company";
  */
 function CompanyList({ companies }) {
   return (<div>
-    {companies.map(company => <Company key={company.handle} company={company} />)}
+    <PaginatedItems itemsPerPage={10} items={companies} paginateFor="companies" />
   </div>
   );
 

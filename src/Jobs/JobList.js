@@ -1,4 +1,6 @@
 import Job from "./Job";
+import PaginatedItems from "../Utilities/Paginate";
+
 
 /**
  * Renders lists of Job cards
@@ -8,9 +10,7 @@ import Job from "./Job";
 function JobList({ jobs }) {
   return (
     <div>
-      {jobs.map((job) => (
-        <Job key={job.id} job={job} />
-      ))}
+      <PaginatedItems itemsPerPage={10} items={jobs} paginateFor="jobs" />
     </div>
   );
 }
