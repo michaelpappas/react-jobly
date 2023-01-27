@@ -106,7 +106,7 @@ function App() {
         <userContext.Provider value={{ user: user.data, setUser }}>
           <BrowserRouter>
             <NavBar logout={logout} />
-            <div className="container mt-5">
+            <div className="container mt-5 pb-5">
               {errors.length !== 0 && <Errors errors={errors} />}
               <RouteList login={login} signUp={signUp} />
             </div>

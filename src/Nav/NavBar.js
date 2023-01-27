@@ -24,6 +24,11 @@ function NavBar({ logout }) {
           </NavLink>
         </li>
         <li className="nav-item">
+          <NavLink className="nav-link" to="/applications">
+            Applications
+          </NavLink>
+        </li>
+        <li className="nav-item">
           <NavLink className="nav-link" to="/profile">
             Profile
           </NavLink>

@@ -4,6 +4,7 @@ import HomePage from "../Homepage/HomePage";
 import Companies from "../Companies/Companies";
 import CompanyDetail from "../Companies/CompanyDetail";
 import Jobs from "../Jobs/Jobs";
+import Applications from "../Applications/Applications";
 import LoginForm from "../User/LoginForm";
 import SignUpForm from "../User/SignUpForm";
 import userContext from "../User/userContext";
@@ -28,6 +29,7 @@ function RouteList({ login, signUp }) {
           <Route element={<Companies />} path="/companies" />
           <Route element={<CompanyDetail />} path="/companies/:handle" />
           <Route element={<Jobs />} path="/jobs" />
+          <Route element={<Applications />} path="/applications" />
           <Route element={<EditProfile />} path="/profile" />
         </>
       )}

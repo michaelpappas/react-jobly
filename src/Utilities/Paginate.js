@@ -1,26 +1,35 @@
-import React, { useState } from 'react';
-import ReactPaginate from 'react-paginate';
-import Company from '../Companies/Company';
-import Job from '../Jobs/Job';
+import React, { useState } from "react";
+import ReactPaginate from "react-paginate";
+import Company from "../Companies/Company";
+import Job from "../Jobs/Job";
 
+/**
+ * Items: Items to render
+ * Props:
+ * - currentItems: list of Current Items to render
+ * - paginateFor - string to identify which card component to render
+ */
 function Items({ currentItems, paginateFor }) {
   return (
     <>
-      {currentItems && paginateFor === "companies" &&
-        currentItems.map((item) => (
-          <Company company={item} />
+      {currentItems &&
+        paginateFor === "companies" &&
+        currentItems.map((item) => <Company key={item.handle} company={item} />)}
 
-        ))}
-
-      {currentItems && paginateFor === "jobs" &&
-        currentItems.map((item) => (
-          <Job job={item} />
-
-        ))}
+      {currentItems &&
+        paginateFor === "jobs" &&
+        currentItems.map((item) => <Job key={item.id} job={item} />)}
     </>
   );
 }
 
+/***
+ * Paginated Items: Renders paginated items and pagination buttons
+ * Props:
+ * - itemsPerPage - int, num of items to render
+ * - items - list of objects (jobs or companies) to render
+ * - paginateFor - string to identify which card component to render
+ */
 function PaginatedItems({ itemsPerPage, items, paginateFor }) {
   // Here we use item offsets; we could also use page offsets
   // following the API or data you're working with.
@@ -42,29 +51,29 @@ function PaginatedItems({ itemsPerPage, items, paginateFor }) {
   return (
     <>
       <Items currentItems={currentItems} paginateFor={paginateFor} />
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="next >"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        renderOnZeroPageCount={null}
-        previousLabel="< previous"
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        previousClassName="page-item"
-        previousLinkClassName="page-link"
-        nextClassName="page-item"
-        nextLinkClassName="page-link"
-        breakClassName="page-item"
-        breakLinkClassName="page-link"
-        containerClassName="pagination justify-content-center pb-4"
-        activeClassName="active"
-      />
+      {items.length >= itemsPerPage && (
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="next >"
+          onPageChange={handlePageClick}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          renderOnZeroPageCount={null}
+          previousLabel="< previous"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
+          containerClassName="pagination justify-content-center pb-4"
+          activeClassName="active"
+        />
+      )}
     </>
   );
 }
-
-
 
 export default PaginatedItems;

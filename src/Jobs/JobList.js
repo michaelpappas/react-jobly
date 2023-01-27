@@ -1,12 +1,10 @@
-import Job from "./Job";
 import PaginatedItems from "../Utilities/Paginate";
-
 
 /**
  * Renders lists of Job cards
  * Props:
  * - jobs - list of obj like [ {id, title, salary, equity }, ...]
- */
+*/
 function JobList({ jobs }) {
   return (
     <div>

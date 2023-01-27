@@ -1,4 +1,3 @@
-import Company from "./Company";
 import PaginatedItems from "../Utilities/Paginate";
 
 /**
