@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import "./SearchBar.css"
 /**
  * SearchBar - Fires parent function on submit
  * Props:
@@ -21,7 +21,7 @@ function SearchBar({ handleSearch }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="form-inline mb-4 w-25">
+    <form onSubmit={handleSubmit} className="SearchBar mb-4">
       <div className="input-group">
         <input className="form-control" name="search" onChange={handleChange} value={searchTerm} placeholder="Enter search term..."/>
         <button className="btn btn-primary">Search</button>

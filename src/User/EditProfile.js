@@ -57,7 +57,7 @@ function EditProfile() {
     <div className="EditProfile w-50 m-auto">
       {errors.length !== 0 && <Errors errors={errors} />}
       {success && <div className="alert alert-success">Updated profile!</div>}
-      <h5 className="card-title">Profile</h5>
+      <h5>Profile</h5>
       <div className="card">
         <form onSubmit={handleSubmit} className="card-body form-group">
           <label htmlFor="username" className="form-label">

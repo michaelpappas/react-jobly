@@ -18,7 +18,7 @@ function HomePage() {
         <>{`Welcome back ${user.firstName}`}</>
       ) : (
         <div className="HomePage-btn">
-          <Link to="/login" className="btn btn-primary mr-2">
+          <Link to="/login" className="btn btn-primary me-2">
             Log in
           </Link>
           <Link to="/signup" className="btn btn-primary">

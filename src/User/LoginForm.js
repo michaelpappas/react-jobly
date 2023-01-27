@@ -43,7 +43,7 @@ function LoginForm({ login }) {
   return (
     <div className="w-50 m-auto">
       {errors.length !== 0 && <Errors errors={errors} />}
-      <h5 className="card-title">Login</h5>
+      <h5>Login</h5>
       <div className="card">
         <form onSubmit={handleSubmit} className="card-body form-group">
           <label htmlFor="username" className="form-label">Username</label>

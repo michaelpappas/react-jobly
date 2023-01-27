@@ -49,7 +49,10 @@ function Jobs() {
 
   return (
     <div className="Jobs">
-      <SearchBar handleSearch={handleSearch} />
+      <div className="header d-flex justify-content-between w-100">
+        <h2>Jobs</h2>
+        <SearchBar handleSearch={handleSearch} />
+      </div>
       {jobs.data.length > 0 ? (
         <JobList jobs={jobs.data} />
       ) : (

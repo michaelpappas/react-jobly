@@ -30,8 +30,8 @@ function Job({ job }) {
     <div className="Job card mb-2">
       {errors.length !== 0 && <Errors errors={errors} />}
       <div className="card-body">
-        <p>{job.title}</p>
-        <p>{job.companyHandle}</p>
+        <h3>{job.title}</h3>
+        <p>{job.companyName}</p>
         <p>Salary:{job.salary}</p>
         <p>Equity:{job.equity}</p>
         {!user.applications.includes(job.id) ? (

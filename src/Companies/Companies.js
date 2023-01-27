@@ -49,10 +49,12 @@ function Companies() {
 
   if (errors.length) return <Errors errors={errors} />;
 
-
   return (
-    <div>
-      <SearchBar handleSearch={handleSearch} />
+    <div className="Companies">
+      <div className="header d-flex justify-content-between w-100">
+        <h2>Companies</h2>
+        <SearchBar handleSearch={handleSearch} />
+      </div>
       {companies.data.length > 0 ? (
         <CompanyList companies={companies.data} />
       ) : (
