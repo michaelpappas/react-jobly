@@ -59,14 +59,27 @@ function NavBar({ logout }) {
     );
   }
   return (
-    <nav className="Navbar navbar justify-content-between navbar-expand navbar-dark bg-dark">
-      <div className="container">
-        <NavLink className="navbar-brand" to="/">
+    <nav className="Navbar navbar justify-content-between navbar-expand-lg navbar-dark bg-dark">
+      <div className="container-fluid">
+        <NavLink className="navbar-brand ms-2" to="/">
           Jobly
         </NavLink>
-        <ul className="navbar-nav mr-auto">
-          {user ? renderAuthNav() : renderUnauthNav()}
-        </ul>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
+          <ul className="navbar-nav">
+            {user ? renderAuthNav() : renderUnauthNav()}
+          </ul>
+        </div>
       </div>
     </nav>
   );

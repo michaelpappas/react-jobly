@@ -56,10 +56,10 @@ function PaginatedItems({ itemsPerPage, items, paginateFor }) {
           breakLabel="..."
           nextLabel="next >"
           onPageChange={handlePageClick}
-          pageRangeDisplayed={5}
+          pageRangeDisplayed={3}
           pageCount={pageCount}
-          renderOnZeroPageCount={null}
-          previousLabel="< previous"
+          renderOnZeroPageCount={false}
+          previousLabel="< prev"
           pageClassName="page-item"
           pageLinkClassName="page-link"
           previousClassName="page-item"
