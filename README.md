@@ -1,8 +1,4 @@
-## Project Name & Pitch
-
-#### Example:
-
-Jobly
+## Jobly
 
 A job search React app that communicates to the Flask Jobly backend. Onced logged in users can view and search for companies or jobs.
 
