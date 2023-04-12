@@ -12,8 +12,8 @@ import Errors from "../Utilities/Errors";
 
 function LoginForm({ login }) {
   const [formData, setFormData] = useState({
-    username: "",
-    password: "",
+    username: "guest",
+    password: "guestpassword",
   });
 
   const [errors, setErrors] = useState([]);
