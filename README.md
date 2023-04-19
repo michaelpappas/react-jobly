@@ -2,6 +2,8 @@
 
 A job search React app that communicates to the Flask Jobly backend. Onced logged in users can view and search for companies or jobs.
 
+A deployed version can be found [here](https://pappas-jobly.surge.sh).
+
 ## Project Status
 In progress:
 - tests
